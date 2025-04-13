@@ -1,45 +1,55 @@
 'use client';
 
-<head>
-  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfqNw8rAAAAAF9rW29qdc5QPcTNUfMztUzJi65K"></script>
-
-</head>
-
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactForms() {
   const [captchaToken, setCaptchaToken] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Log e atualização do token do reCAPTCHA
+  // Atualiza o token do reCAPTCHA
   const handleRecaptchaChange = (token) => {
     setCaptchaToken(token);
     console.log("reCAPTCHA token atualizado:", token);
   };
 
   // Handler de envio do formulário
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Formulário submetido");
-    
+    setLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
     // Captura os valores do formulário
     const formData = new FormData(e.target);
-    console.log("Dados do formulário:");
-    for (const [name, value] of formData.entries()) {
-      console.log(`${name}: ${value}`);
+    const data = Object.fromEntries(formData.entries());
+    data.captchaToken = captchaToken; // Inclui o token do reCAPTCHA
+
+    console.log("Dados do formulário:", data);
+
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to send message");
+      }
+      console.log("Resposta do backend:", result);
+      setSuccessMessage("Message sent successfully!");
+      e.target.reset();
+      setCaptchaToken(null);
+    } catch (error) {
+      console.error("Erro ao enviar os dados:", error);
+      setErrorMessage("Error sending message. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-    
-    console.log("Token do reCAPTCHA no submit:", captchaToken);
-    
-    // Aqui você pode adicionar a lógica para enviar os dados para o backend, por exemplo:
-    // fetch("/api/contact", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(Object.fromEntries(formData)),
-    // })
-    //   .then(res => res.json())
-    //   .then(data => console.log("Resposta do backend:", data))
-    //   .catch(err => console.error("Erro ao enviar os dados:", err));
   };
 
   return (
@@ -59,12 +69,14 @@ export default function ContactForms() {
             name="firstName"
             placeholder="First Name"
             className="w-full md:w-1/2 px-4 py-2 rounded bg-white text-black placeholder-gray-400"
+            required
           />
           <input
             type="text"
             name="lastName"
             placeholder="Last Name"
             className="w-full md:w-1/2 px-4 py-2 rounded bg-white text-black placeholder-gray-400"
+            required
           />
         </div>
 
@@ -74,6 +86,7 @@ export default function ContactForms() {
           name="email"
           placeholder="Email"
           className="w-full px-4 py-2 rounded bg-white text-black placeholder-gray-400"
+          required
         />
 
         {/* Telefone */}
@@ -82,6 +95,7 @@ export default function ContactForms() {
           name="phone"
           placeholder="Phone"
           className="w-full px-4 py-2 rounded bg-white text-black placeholder-gray-400"
+          required
         />
 
         {/* Mensagem */}
@@ -90,21 +104,32 @@ export default function ContactForms() {
           placeholder="Additional Details"
           rows="4"
           className="w-full px-4 py-2 rounded bg-white text-black placeholder-gray-400"
+          required
         />
 
         {/* Widget do reCAPTCHA */}
         <div className="flex justify-center">
           <ReCAPTCHA
-            sitekey="6LeCVg8rAAAAAGhUyVIYbEn-ro4Y5YJL3q1x59kPW29qdc5QPcTNUfMztUzJi65K"
+            sitekey="6LeCVg8rAAAAAGhUyVIYbEn-ro4Y5YJL3q1x59kP"
             onChange={handleRecaptchaChange}
             theme="light"
           />
         </div>
 
+        {/* Feedback de loading e mensagens */}
+        {loading && <p className="text-white text-center">Sending...</p>}
+        {successMessage && (
+          <p className="text-green-300 text-center">{successMessage}</p>
+        )}
+        {errorMessage && (
+          <p className="text-yellow-300 text-center">{errorMessage}</p>
+        )}
+
         {/* Botão de envio */}
         <button
           type="submit"
           className="bg-black px-6 py-3 rounded text-white font-semibold hover:bg-gray-800 transition w-full"
+          disabled={loading}
         >
           Send
         </button>

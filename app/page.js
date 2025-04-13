@@ -32,32 +32,34 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section
-        ref={homeRef}
-        className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/cadilac_front.png')" }}
-      >
-        {/* Navbar flutuante sobre a imagem */}
-        <Navbar onNavClick={navHandlers}/>
+        {/* Hero Section */}
+        <section
+          ref={homeRef}
+          className="relative w-full min-h-screen bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/cadilac_front.png')" }}
+        >
+          {/* Floating Navbar */}
+          <Navbar onNavClick={navHandlers} />
 
-        {/* Conteúdo do Hero */}
-        <div className="flex items-center h-full px-32 py-42">
-          <div className="text-left text-white max-w-2xl">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
-              Book and repair your car in Easy steps.
-            </h1>
-            <p className="text-lg md:text-xl text-gray-200 mb-8">
-              Sign up with Carsvroom and repair your car whenever you need, asap, and online booking.
-            </p>
-            <button
-              onClick={() => scrollToSection(subscriptionRef)} 
-              className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-800 transition">
-              Get Started
-            </button>
+          {/* Hero Content */}
+          <div className="flex flex-col items-center justify-center h-full px-6 md:px-32 py-42 md:py-42">
+            <div className="text-white max-w-2xl text-center md:text-left">
+              <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
+                Book and repair your car in Easy steps.
+              </h1>
+              <p className="text-lg md:text-xl text-gray-200 mb-8">
+                Sign up with Carsvroom and repair your car whenever you need, asap, and online booking.
+              </p>
+              <button
+                onClick={() => scrollToSection(subscriptionRef)}
+                className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-800 transition"
+              >
+                Get Started
+              </button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
 
       {/* Maintenance Plans Section */}
       <section
@@ -269,10 +271,12 @@ export default function Home() {
           <h4 className="text-xl md:text-4xl font-bold mb-12 text-black">
             Get the job done following 3 steps
           </h4>
-          <div className="relative flex flex-col md:flex-row items-start md:items-center justify-center gap-12">
-            <div className="absolute hidden md:block inset-x-0 top-1/2 h-[2px] " />
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-12">
+            {/* This line between steps is visible only on medium screens and above */}
+            <div className="absolute hidden md:block inset-x-0 top-1/2 h-[2px]" />
+            
             {/* Step 1 */}
-            <div className="relative z-10 flex flex-col items-center w-52 text-center">
+            <div className="relative z-10 flex flex-col items-center w-full md:w-52 text-center">
               <div
                 className="w-20 h-20 rounded-md flex items-center justify-center mb-4"
                 style={{
@@ -290,8 +294,9 @@ export default function Home() {
                 Choose your best fit for your needs
               </p>
             </div>
+            
             {/* Step 2 */}
-            <div className="relative z-10 flex flex-col items-center w-52 text-center">
+            <div className="relative z-10 flex flex-col items-center w-full md:w-52 text-center">
               <div
                 className="w-20 h-20 rounded-md flex items-center justify-center mb-4"
                 style={{
@@ -309,8 +314,9 @@ export default function Home() {
                 Book your maintenance on the same day
               </p>
             </div>
+            
             {/* Step 3 */}
-            <div className="relative z-10 flex flex-col items-center w-52 text-center">
+            <div className="relative z-10 flex flex-col items-center w-full md:w-52 text-center">
               <div
                 className="w-20 h-20 rounded-md flex items-center justify-center mb-4"
                 style={{
@@ -323,9 +329,7 @@ export default function Home() {
                   className="w-12 h-12 object-contain"
                 />
               </div>
-              <h3 className="text-black font-semibold mb-1">
-                Bring your car
-              </h3>
+              <h3 className="text-black font-semibold mb-1">Bring your car</h3>
               <p className="text-gray-600 text-sm">
                 Bring your mobile phone or your angle for the easiest drive
               </p>
@@ -333,6 +337,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Image + Text Section */}
       <section className="py-12 px-6 bg-red-800 text-white">
@@ -467,8 +472,8 @@ export default function Home() {
         id="about"
         className="py-16 px-6 bg-white">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
-          {/* Imagens à esquerda */}
-          <div className="relative flex justify-center md:justify-end">
+          {/* Images on the left */}
+          <div className="relative flex flex-row justify-center items-center md:justify-end">
             <img
               src="/images/brodinho.png"
               alt="Brodinho"
@@ -477,11 +482,11 @@ export default function Home() {
             <img
               src="/images/andre.png"
               alt="Andre"
-              className="w-48 h-64 object-cover rounded-lg shadow-lg absolute top-8 left-20 transform -rotate-2"
+              className="w-48 h-64 object-cover rounded-lg shadow-lg transform -rotate-10 -ml-12 md:ml-0 md:absolute md:top-8 md:left-20"
             />
           </div>
-          {/* Texto à direita */}
-          <div>
+          {/* Text on the right */}
+          <div className="text-center md:text-left">
             <p className="text-sm text-red-600 font-semibold uppercase tracking-wider mb-2">
               WHY CHOOSE US
             </p>
@@ -497,6 +502,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Contact Form Section */}
       <section 
@@ -524,56 +530,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Final Section with Background */}
-      <section
-        className="relative py-10 px-6"
-        style={{
-          backgroundImage: "url('/images/background_prefooter.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-red-600/90"></div>
-        <div className="relative z-10 max-w-6xl mx-auto text-white">
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Logo e nome do plano */}
-            <div className="flex flex-col items-center md:items-start">
-              <img
-                src="/images/Logo_Carsvroom_black.png"
-                alt="Carsvroom"
-                className="h-32 mb-1"
-              />
-              <p className="text-lg font-bold">Carsvroom Plan</p>
-            </div>
-            {/* Endereço e contatos */}
-            <div>
-              <h3 className="text-lg font-bold mb-2">Address &amp; Info</h3>
-              <p>13090 100th Ave, Kirkland, 98034</p>
-              <p>Opening hours: Mon-Fri 9am to 6pm</p>
-              <p>
-                Email:{" "}
-                <a href="mailto:carsvroomplan@gmail.com" className="underline hover:text-gray-300">
-                  carsvroomplan@gmail.com
-                </a>
-              </p>
-              <p>Support: (425) 477-6527</p>
-            </div>
-            {/* Mapa incorporado */}
-            <div>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2684.0957657625886!2d-122.211978009679!3d47.721390405796015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490120b03c88247%3A0xbbb11738d7eafadd!2sParking%20lot%2C%2013500%20100th%20Ave%20NE%2C%20Kirkland%2C%20WA%2098034!5e0!3m2!1spt-BR!2sus!4v1743739628575!5m2!1spt-BR!2sus"
-                width="100%"
-                height="200"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-lg shadow-md"
-              />
+        {/* CTA Final Section with Background */}
+        <section
+          className="relative py-10 px-6"
+          style={{
+            backgroundImage: "url('/images/background_prefooter.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 bg-red-600/90"></div>
+          <div className="relative z-10 max-w-6xl mx-auto text-white">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center text-center">
+              {/* Logo and Plan Name */}
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/Logo_Carsvroom_black.png"
+                  alt="Carsvroom"
+                  className="h-32 mb-1"
+                />
+                <p className="text-lg font-bold">Carsvroom Plan</p>
+              </div>
+              {/* Address & Contacts */}
+              <div>
+                <h3 className="text-lg font-bold mb-2">Address &amp; Info</h3>
+                <p>13090 100th Ave, Kirkland, 98034</p>
+                <p>Opening hours: Mon-Fri 9am to 6pm</p>
+                <p>
+                  Email:{" "}
+                  <a href="mailto:carsvroomplan@gmail.com" className="underline hover:text-gray-300">
+                    carsvroomplan@gmail.com
+                  </a>
+                </p>
+                <p>Support: (425) 477-6527</p>
+              </div>
+              {/* Embedded Map */}
+              <div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2684.0957657625886!2d-122.211978009679!3d47.721390405796015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490120b03c88247%3A0xbbb11738d7eafadd!2sParking%20lot%2C%2013500%20100th%20Ave%20NE%2C%20Kirkland%2C%20WA%2098034!5e0!3m2!1spt-BR!2sus!4v1743739628575!5m2!1spt-BR!2sus"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-lg shadow-md"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+
 
       {/* Footer */}
       <footer 
