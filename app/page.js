@@ -93,7 +93,7 @@ export default function Home() {
                 <span>24/7 Chat Support</span>
               </li>
             </ul>
-            <SubscribeButton planId="price_1RBlJVQa6qQH6kkx575ekvkt" />   
+            <SubscribeButton planId="price_1RDuBsHvSLf3LnqcI3LdAli3" />   
           </div>
 
           {/* STANDARD (RECOMMENDED) */}
@@ -126,7 +126,7 @@ export default function Home() {
                 <span>Priority Scheduling</span>
               </li>
             </ul>
-            <SubscribeButton planId="price_1RBlJxQa6qQH6kkxMfsUKXQ1" />
+            <SubscribeButton planId="price_1RDuCNHvSLf3LnqcR0FmqOIG" />
           </div>
 
           {/* PREMIUM PLAN */}
@@ -156,7 +156,7 @@ export default function Home() {
                 <span>Unlimited Service Calls</span>
               </li>
             </ul>
-            <SubscribeButton planId="price_1RBlKEQa6qQH6kkxIcOJvW7z" />
+            <SubscribeButton planId="price_1RDuD8HvSLf3LnqcQzNgklzU" />
           </div>
         </div>
       </section>

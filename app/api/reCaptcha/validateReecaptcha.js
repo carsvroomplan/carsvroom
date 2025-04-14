@@ -1,26 +1,19 @@
-// Exemplo de validação no back-end usando fetch:
-import fetch from 'node-fetch';
-
 export default async function validateRecaptcha(token) {
-  const projectId = "carsvroom"; // substitua pelo ID do seu projeto
-  const apiKey = process.env.RECAPTCHA_API_KEY; // geralmente você obtém uma chave de API para chamar o reCAPTCHA Enterprise
-  const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const url = `https://www.google.com/recaptcha/api/siteverify`;
 
-  const body = {
-    event: {
-      token: token,
-      siteKey: "6Ld3RRYrAAAAAHVpHmLitA1Cyr4jk0XFtKKUjfmu" // mesma Site Key do front-end
-    }
-  };
+  const params = new URLSearchParams();
+  params.append('secret', secretKey);
+  params.append('response', token);
 
   const response = await fetch(url, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: JSON.stringify(body)
+    body: params
   });
-  
+
   const result = await response.json();
   console.log("Resultado da validação do reCAPTCHA:", result);
   return result;

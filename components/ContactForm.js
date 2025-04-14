@@ -110,7 +110,7 @@ export default function ContactForms() {
         {/* Widget do reCAPTCHA */}
         <div className="flex justify-center">
           <ReCAPTCHA
-            sitekey="6LeCVg8rAAAAAGhUyVIYbEn-ro4Y5YJL3q1x59kP"
+            sitekey="6Lco1BgrAAAAAKEXhW0BceoVBFfVwFqmJhFzG-1a"
             onChange={handleRecaptchaChange}
             theme="light"
           />
