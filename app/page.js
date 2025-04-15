@@ -534,7 +534,6 @@ export default function Home() {
         <section
           className="relative py-10 px-6"
           style={{
-            backgroundImage: "url('/images/background_prefooter.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
