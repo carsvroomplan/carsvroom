@@ -156,7 +156,7 @@ export default function Home() {
                 <span>Unlimited Service Calls</span>
               </li>
             </ul>
-            <SubscribeButton planId="price_1RDuD8HvSLf3LnqcQzNgklzU" />
+            <SubscribeButton planId="price_1RDuD8HvSLf3LnqcQzNgklzU" /> {/* ais aqui um mega comentário sobre updates: o price id deve match com o stripe */}
           </div>
         </div>
       </section>
