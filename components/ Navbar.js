@@ -42,7 +42,7 @@ export default function Navbar({ onNavClick }) {
             Contact
           </a>
           <a href="tel:+14254776527" className="font-bold hover:text-gray-200 transition">
-            (425) 477-6527
+            (425) 477-0537
           </a>
         </div>
         {/* Botão de Menu Mobile */}
